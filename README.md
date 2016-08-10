@@ -2,6 +2,8 @@ TravisMultipleEmulators
 ========
 [![Build Status](https://travis-ci.org/zsavely/TravisMultipleEmulators.svg?branch=master)](https://travis-ci.org/zsavely/TravisMultipleEmulators)
 
+[Blogpost](http://szagurskii.com/blog/how-to-run-tests-on-two-emulators-using-travis-ci/) explaining the issue.
+
 ### License
 
     The MIT License (MIT)
