@@ -37,6 +37,14 @@ notifications:
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 
+after_failure:
+- "cat /home/travis/build/zsavely/TravisMultipleEmulators/app/build/outputs/lint-results-debug.html"
+- "cat /home/travis/build/zsavely/TravisMultipleEmulators/app/build/outputs/lint-results-debug.xml"
+- "cat /home/travis/build/zsavely/TravisMultipleEmulators/app/build/outputs/lint-results-release.html"
+- "cat /home/travis/build/zsavely/TravisMultipleEmulators/app/build/outputs/lint-results-release.xml"
+- "cat /home/travis/build/zsavely/TravisMultipleEmulators/app/build/outputs/lint-results-release-fatal.html"
+- "cat /home/travis/build/zsavely/TravisMultipleEmulators/app/build/outputs/lint-results-release-fatal.xml"
+
 cache:
   directories:
   - "$HOME/.m2"
