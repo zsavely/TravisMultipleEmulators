@@ -25,10 +25,11 @@ script:
   - echo no | android create avd --force -n test2 -t ${ANDROID_TARGET2} --abi ${ANDROID_ABI}
   - emulator -avd test1 -no-skin -no-audio -no-window &
   - emulator -avd test2 -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
+  - sh scripts/wait-for-first-emulator.sh
+  - sh scripts/wait-for-second-emulator.sh
   - adb -s emulator-5554 shell setprop dalvik.vm.dexopt-flags v=n,o=v
   - adb -s emulator-5556 shell setprop dalvik.vm.dexopt-flags v=n,o=v
-  - "./gradlew clean build connectedAndroidTest -PdisablePreDex --stacktrace"
+  - sh scripts/script.sh
 
 notifications:
   email: true
