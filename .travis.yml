@@ -1,0 +1,43 @@
+sudo: required
+
+language: android
+jdk: oraclejdk8
+
+env:
+ global:
+    - ANDROID_TARGET1=android-21
+    - ANDROID_TARGET2=android-15
+    - ANDROID_ABI=armeabi-v7a
+
+android:
+  components:
+  - platform-tools
+  - tools
+  - build-tools-24.0.1
+  - android-24
+
+before_install:
+- chmod +x gradlew
+- export ANDROID_SERIAL='emulator-5554'
+
+script:
+  - echo no | android create avd --force -n test1 -t ${ANDROID_TARGET1} --abi ${ANDROID_ABI}
+  - echo no | android create avd --force -n test2 -t ${ANDROID_TARGET2} --abi ${ANDROID_ABI}
+  - emulator -avd test1 -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb -s emulator-5554 shell setprop dalvik.vm.dexopt-flags v=n,o=v
+  - adb -s emulator-5556 shell setprop dalvik.vm.dexopt-flags v=n,o=v
+- "./gradlew clean build connectedAndroidTest -PdisablePreDex --stacktrace"
+
+notifications:
+  email: true
+
+before_cache:
+- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+cache:
+  directories:
+  - "$HOME/.m2"
+  - "$HOME/.gradle"
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
