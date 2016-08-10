@@ -27,7 +27,7 @@ script:
   - android-wait-for-emulator
   - adb -s emulator-5554 shell setprop dalvik.vm.dexopt-flags v=n,o=v
   - adb -s emulator-5556 shell setprop dalvik.vm.dexopt-flags v=n,o=v
-- "./gradlew clean build connectedAndroidTest -PdisablePreDex --stacktrace"
+  - "./gradlew clean build connectedAndroidTest -PdisablePreDex --stacktrace"
 
 notifications:
   email: true
