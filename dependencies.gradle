@@ -1,0 +1,62 @@
+ext.bp = [
+    support: "com.android.support",
+    sq     : "com.squareup",
+]
+
+ext.versions = [
+
+    // Testing dependencies.
+    junit            : '4.12',
+    robolectric      : '3.1.2',
+    assertJ          : '2.5.0',
+    equalsVerifier   : '2.1.4',
+    mockito          : '1.10.19',
+    supportTestRunner: '0.5',
+    espresso         : '2.2.2',
+    truth            : '0.28',
+]
+
+
+ext.testingLibraries = [
+    // https://github.com/square/okhttp/tree/master/mockwebserver
+    okHttpMockWebServer   : "${bp.sq}.okhttp3:mockwebserver:$versions.okhttp",
+
+    // http://junit.org/junit4/
+    junit                 : "junit:junit:${versions.junit}",
+
+    // http://robolectric.org/
+    // https://github.com/robolectric/robolectric/
+    robolectric           : "org.robolectric:robolectric:${versions.robolectric}",
+
+    // http://joel-costigliola.github.io/assertj/
+    assertJ               : "org.assertj:assertj-core:${versions.assertJ}",
+
+    // https://github.com/jqno/equalsverifier
+    equalsVerifier        : "nl.jqno.equalsverifier:equalsverifier:${versions.equalsVerifier}",
+
+    // http://mockito.org/
+    mockitoCore           : "org.mockito:mockito-core:${versions.mockito}",
+
+    // Assertion/Proposition framework for Java unit tests.
+    // http://google.github.io/truth
+    truth                 : "com.google.truth:truth:${versions.truth}",
+
+    // Android JUnit Runner.
+    // https://google.github.io/android-testing-support-library/downloads/
+    supportTestRunner     : "${bp.support}.test:runner:${versions.supportTestRunner}",
+    // JUnit4 Rules.
+    supportTestRules      : "${bp.support}.test:rules:${versions.supportTestRunner}",
+    // Espresso core.
+    espressoCore          : "${bp.support}.test.espresso:espresso-core:${versions.espresso}",
+    // Espresso-contrib for DatePicker, RecyclerView, Drawer actions, Accessibility checks, CountingIdlingResource.
+    espressoContrib       : "${bp.support}.test.espresso:espresso-contrib:${versions.espresso}",
+    // Espresso-web for WebView support.
+    espressoWeb           : "${bp.support}.test.espresso:espresso-web:${versions.espresso}",
+    // Espresso-idling-resource for synchronization with background jobs.
+    espressoIdlingResource: "${bp.support}.test.espresso:espresso-idling-resource:${versions.espresso}",
+    // Espresso-Intents is an extension to Espresso,
+    // which enables validation and stubbing of Intents sent out by the application under test.
+    // It’s like Mockito, but for Android Intents.
+    // https://google.github.io/android-testing-support-library/docs/espresso/intents/index.html
+    espressoIntents       : "${bp.support}.test.espresso:espresso-intents:${versions.espresso}",
+]

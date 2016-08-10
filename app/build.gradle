@@ -10,6 +10,8 @@ android {
     targetSdkVersion 24
     versionCode 1
     versionName "1.0"
+
+    testInstrumentationRunner 'com.szagurskii.travismultipleemulators.CustomTestRunner'
   }
   buildTypes {
     release {
@@ -18,8 +20,28 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
+  packagingOptions {
+    exclude 'LICENSE.txt'
+    exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+    exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+  }
+  lintOptions {
+    disable 'MissingPermission'
+  }
 }
 
 dependencies {
-  testCompile 'junit:junit:4.12'
+  testCompile testingLibraries.junit
+  testCompile testingLibraries.robolectric
+  testCompile testingLibraries.assertJ
+  testCompile testingLibraries.equalsVerifier
+  testCompile testingLibraries.mockitoCore
+
+  androidTestCompile testingLibraries.supportTestRunner
+  androidTestCompile testingLibraries.supportTestRules
+  androidTestCompile testingLibraries.espressoCore
+  androidTestCompile testingLibraries.espressoContrib
+  androidTestCompile testingLibraries.espressoWeb
+  androidTestCompile testingLibraries.espressoIdlingResource
+  androidTestCompile testingLibraries.espressoIntents
 }
