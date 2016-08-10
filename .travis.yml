@@ -19,19 +19,33 @@ android:
 
 before_install:
 - chmod +x gradlew
-- export ANDROID_SERIAL='emulator-5554'
 
 script:
+    # Create two emulator avds.
   - echo no | android create avd --force -n test1 -t ${ANDROID_TARGET1} --abi ${ANDROID_ABI}
   - echo no | android create avd --force -n test2 -t ${ANDROID_TARGET2} --abi ${ANDROID_ABI}
+
+    # Start the first emulator.
   - emulator -avd test1 -no-skin -no-audio -no-window &
+    # Wait for the second emulator to start.
   - sh scripts/wait-for-first-emulator.sh
+
+    # Just to check whether the device is seen by ADB.
   - "adb devices"
+
+    # Start the second emulator.
   - emulator -avd test2 -no-skin -no-audio -no-window &
+    # Wait for the second emulator to start.
   - sh scripts/wait-for-second-emulator.sh
+
+    # Just to check whether the device is seen by ADB.
   - "adb devices"
-  # - adb -s emulator-5554 shell setprop dalvik.vm.dexopt-flags v=n,o=v
-  # - adb -s emulator-5556 shell setprop dalvik.vm.dexopt-flags v=n,o=v
+
+    # Unlock the emulators.
+  - adb -s emulator-5554 shell input keyevent 82
+  - adb -s emulator-5556 shell input keyevent 82
+
+    # Run the main script.
   - sh scripts/script.sh
 
 notifications:
@@ -41,6 +55,7 @@ before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 
 after_failure:
+# Print all lint output if the build failed.
 - "cat /home/travis/build/zsavely/TravisMultipleEmulators/app/build/outputs/lint-results-debug.html"
 - "cat /home/travis/build/zsavely/TravisMultipleEmulators/app/build/outputs/lint-results-debug.xml"
 - "cat /home/travis/build/zsavely/TravisMultipleEmulators/app/build/outputs/lint-results-release.html"
