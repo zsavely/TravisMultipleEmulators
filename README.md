@@ -1,5 +1,6 @@
 TravisMultipleEmulators
 ========
+[![Build Status](https://travis-ci.org/zsavely/TravisMultipleEmulators.svg?branch=master)](https://travis-ci.org/zsavely/RxClipboard)
 
 ### License
 
